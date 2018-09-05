@@ -5,16 +5,37 @@
         <link rel="stylesheet" type="text/css" href="../public/style.css"/>
     </head>
     <body>
-            <div class="ui fixed inverted menu">
-                    <div class="ui container">
-                        <div class="header item">
-                            <i class="code icon"></i>Blog Site</div>
-                        <a href="/" class="item">Home</a>
-                        <a href="/blogs/new" class="item">Novo Post</a>
+            <div class="container">                   
+                <div class="input-group">
+                    <input type="text" class="form-control"aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtro</button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="#">Nome</a>
+                          <div role="separator" class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Tipo de Cozinha</a>
+                        </div>
+                        <button class="disabled btn btn-outline-secondary" type="button">Pesquisar</button>
                     </div>
                 </div>
-        <h1>Teste</h1>
+            <div class="jumbotron">
+
+                    <% restaurants.forEach(function(restaurant){ %>
+                        <div class="col-xs-1" align="center">
+                        <h1><%= restaurant.name %></h1>
+                        <div class="img-responsive">
+                            <img src="<%= restaurant.photo %>">
+                        </div>
+                    </div>
+                        <% }) %>
+
+                </div>
+            </div>
+
+                
+
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     </body>
 </html>
