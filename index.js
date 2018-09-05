@@ -5,7 +5,7 @@ var bodyParser = require("body-parser"),
     expressSanitizer = require("express-sanitizer");
 
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "."));
+app.use(express.static("."));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
