@@ -7,7 +7,7 @@ var bodyParser = require("body-parser"),
     search = require("./public/search"),
     Restaurant = require("./models/restaurant"),
     seedDB = require("./seeds")
-    
+
 mongoose.connect("mongodb://localhost/restaurant")
 app.set("view engine", "ejs");
 app.use(express.static("."));
@@ -16,12 +16,12 @@ app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 seedDB();
 
-app.get("/", function(req, res){
-    Restaurant.find({}, function(err, allRestaurants){
-        if(err){
+app.get("*", function (req, res) {
+    Restaurant.find({}, function (err, allRestaurants) {
+        if (err) {
             console.log(err);
         } else {
-            res.render("index",{restaurants:allRestaurants});
+            res.render("index", { restaurants: allRestaurants });
         }
     });
 })

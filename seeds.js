@@ -2,8 +2,8 @@ var mongoose = require("mongoose");
 var Restaurant = require("./models/restaurant");
 var jsonData = require('./public/restaurants.json');
 
-jsonData.forEach(function(seed){
-    seed.stars = Math.floor(Math.random() * (6 - 0)) + 0;
+jsonData.forEach(function (seed) {
+    seed.stars = Math.floor(Math.random() * (6 - 0) + 0);
     seed.distance = Math.floor(Math.random() * (26 - 1) + 1);
 });
 
@@ -13,7 +13,7 @@ function seedDB() {
             console.log("err");
         }
         else {
-            console.log("removido");
+            console.log("removed a Restaurant");
         }
         jsonData.forEach(function (seed) {
             Restaurant.create(seed, function (err) {

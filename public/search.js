@@ -1,34 +1,23 @@
-/* function search(){
-  var opt = $("button#filter").text()
-  for (var i = 0, l = restaurants.length; i < l; i++){
-    if (arr[i][opt] === name) {
-      return arr[i][opt];
-    }
-  }
-  return false;
-}
-*/
+var deleted = [];
 
-function teste(restaurants){
-  console.log(restaurants);
-  for (var i = 0; i <= restaurants.length; i++){
-
-      console.log(restaurants[i].name);
-
-  }
+function restore() {
+    $.each(deleted, function (i, v) {
+      $('#main').append(v);
+    });
 }
 
-function searchByName(name) {
-    for (var i = 0, l = arr.length; i < l; i++){
-      if (arr[i]['name'] === name) {
-        return arr[i]['name'];
-      }
-    }
-    return false;
+function findById(id) {
+  if ($("div.col-xs-1[id!='" + id + "']").length > 1) {
+    deleted.push($("div.col-xs-1[id!='" + id + "']").detach());
+  }
+  else {
+    restore();
+    deleted.push($("div.col-xs-1[id!='" + id + "']").detach());
+  }
 }
 
 function searchByKitchen(kitchen) {
-  for (var i = 0, l = arr.length; i < l; i++){
+  for (var i = 0, l = arr.length; i < l; i++) {
     if (arr[i]['kitchen'] === kitchen) {
       return arr[i]['kitchen'];
     }
@@ -36,8 +25,7 @@ function searchByKitchen(kitchen) {
   return false;
 }
 
-function searchFilter(name){
+function searchFilter(name) {
   $("button#filter").text(name);
   $("button#search").removeClass('disabled');
 }
-

@@ -4,50 +4,49 @@
     <title>FindRestaurantes</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../public/style.css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <form action="/restaurants/" method="GET" >
-            <div class="input-group">
-                <select id="searchBar" class="form-control">
-                    <% restaurants.forEach(function(restaurant){ %>
-                        <option>
-                            <%= restaurant.name %>
-                        </option>
-                        <% }); %>
-                </select>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary dropdown-toggle" id="filter" type="button" data-toggle="dropdown">Nome</button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" onclick="searchFilter('Nome')">Nome</a>
-                        <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" onclick="searchFilter('Culinária')">Tipo de Culinária</a>
-                    </div>
-                    <a class="btn btn-outline-secondary" href="/restaurants" id="search" type="button">Pesquisar</a>
-                </div>
+    <div id="main" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">FindRestaurantes</a>
+    </nav>
+      
+    <div class="input-group">
+        <select id="searchBar" onchange="findById(value);" class="form-control">
+            <% restaurants.forEach(function(restaurant){ %>
+                <option value="<%= restaurant._id %>"><%= restaurant.name %></option>
+                <% }); %>
+        </select>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" id="filter" type="button" data-toggle="dropdown">Nome</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" onclick="searchFilter('Nome')">Nome</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="searchFilter('Culinária')">Tipo de Culinária</a>
             </div>
-        </form>
-
-        <% restaurants.forEach(function(restaurant){ %>
-            <div class="col-xs-1" align="center">
-                <h1 class="display-4">
-                    <%= restaurant.name %>
-                </h1>
-                <div class="img-responsive">
-                    <img src="<%= restaurant.photo %>">
-                </div>
-                <h4>
-                    <%= restaurant.kitchen %>
-                </h4>
-                <hr>
-            </div>
-            <% }); %>
+        </div>
     </div>
-    <script src="../public/search.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <% restaurants.forEach(function(restaurant){ %>
+        <div class="col-xs-1 <%= restaurant.name.split(" ").join("").normalize('NFD').replace(/[\u0300-\u036f]/g, "") %>" id="<%= restaurant._id %>" align="center">
+            <h1 class="display-4"> <%= restaurant.name %></h1>
+            <div class="img-responsive"><img src="<%= restaurant.photo %>"></div>
+            <h4><%= restaurant.kitchen %></h4>
+            <div class="rating">
+                <% for(var i = 0; i < Math.random() * 6; i++){ %><span class="fa fa-star checked"></span><% } %>
+            </div>
+            <h4 id="distance"><%= restaurant.distance %>km de sua região</h4>
+            <hr>
+        </div>
+        <% }); %>
+    </div>
+            <script src="../public/search.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+            <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
