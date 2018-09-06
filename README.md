@@ -7,7 +7,7 @@ Initialize mongo
 ```
 mongod
 ```
-And then start the server
+And then, on another prompt, start the server 
 
 ```
 node index.js
