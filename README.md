@@ -12,3 +12,4 @@ And then start the server
 ```
 node index.js
 ```
+Go to localhost:3000
