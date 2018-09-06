@@ -7,22 +7,30 @@ function restore() {
 }
 
 function findById(id) {
-  if ($("div.col-xs-1[id!='" + id + "']").length > 1) {
-    deleted.push($("div.col-xs-1[id!='" + id + "']").detach());
-  }
-  else {
+  if(id == "todos"){
     restore();
-    deleted.push($("div.col-xs-1[id!='" + id + "']").detach());
+  } else {
+    if ($("div.col-xs-1[id!='" + id + "']").length > 1) {
+      deleted.push($("div.col-xs-1[id!='" + id + "']").detach());
+    }
+    else {
+      restore();
+      deleted.push($("div.col-xs-1[id!='" + id + "']").detach());
+   }
   }
 }
 
-function searchByKitchen(kitchen) {
-  for (var i = 0, l = arr.length; i < l; i++) {
-    if (arr[i]['kitchen'] === kitchen) {
-      return arr[i]['kitchen'];
-    }
-  }
-  return false;
+function sortEventsByOrder(a,b) {
+
+	var startA = parseInt($(a).attr('data-order'));
+	var startB = parseInt($(b).attr('data-order'));	
+	return startA - startB;
+}
+
+
+
+function order(){
+  $('#restaurants').html($('div.col-xs-1').sort(sortEventsByOrder))
 }
 
 function searchFilter(name) {

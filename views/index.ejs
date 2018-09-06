@@ -17,6 +17,7 @@
       
     <div class="input-group">
         <select id="searchBar" onchange="findById(value);" class="form-control">
+                <option value="todos">Todos</option>
             <% restaurants.forEach(function(restaurant){ %>
                 <option value="<%= restaurant._id %>"><%= restaurant.name %></option>
                 <% }); %>
@@ -30,19 +31,22 @@
             </div>
         </div>
     </div>
+    <button class="btn btn-outline-secondary" onclick="order()" type="button">Ordenar por mais proximos</button>
 
-    <% restaurants.forEach(function(restaurant){ %>
-        <div class="col-xs-1 <%= restaurant.name.split(" ").join("").normalize('NFD').replace(/[\u0300-\u036f]/g, "") %>" id="<%= restaurant._id %>" align="center">
-            <h1 class="display-4"> <%= restaurant.name %></h1>
-            <div class="img-responsive"><img src="<%= restaurant.photo %>"></div>
-            <h4><%= restaurant.kitchen %></h4>
-            <div class="rating">
-                <% for(var i = 0; i < Math.random() * 6; i++){ %><span class="fa fa-star checked"></span><% } %>
-            </div>
-            <h4 id="distance"><%= restaurant.distance %>km de sua região</h4>
-            <hr>
+        <div id="restaurants">
+            <% restaurants.forEach(function(restaurant){ %>
+                <div data-order="<%= restaurant.distance %>" class="col-xs-1 <%= restaurant.name.split(" ").join("").normalize('NFD').replace(/[\u0300-\u036f]/g, "") %>" id="<%= restaurant._id %>" align="center">
+                    <h1 class="display-4"> <%= restaurant.name %></h1>
+                    <div class="img-responsive"><img src="<%= restaurant.photo %>"></div>
+                    <h4><%= restaurant.kitchen %></h4>
+                    <div class="rating">
+                       <% for(var i = 0; i < Math.random() * 6; i++){ %><span class="fa fa-star checked"></span><% } %>
+                    </div>
+                    <h4 class="distance"><%= restaurant.distance %> km de sua região</h4>
+                    <hr>
+                </div>
+            <% }); %>
         </div>
-        <% }); %>
     </div>
             <script src="../public/search.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
