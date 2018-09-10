@@ -7,6 +7,12 @@ Initialize mongo
 ```
 mongod
 ```
+Install the packages
+
+```
+npm install
+```
+
 And then, on another prompt, start the server 
 
 ```
