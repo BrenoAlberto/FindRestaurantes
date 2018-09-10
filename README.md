@@ -7,13 +7,13 @@ Initialize mongo
 ```
 mongod
 ```
-Install the packages
+And then, on another prompt, install the packages
 
 ```
 npm install
 ```
 
-And then, on another prompt, start the server 
+Start the server 
 
 ```
 node index.js
